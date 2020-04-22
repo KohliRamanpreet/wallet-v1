@@ -13,7 +13,8 @@ import com.wallet.repository.UserRepository;
 @SpringBootApplication(scanBasePackages= {"com.wallet.controller"})
 @EnableJpaRepositories("com.wallet.repository")
 @EntityScan("com.wallet.model")*/
-@SpringBootApplication(scanBasePackages = {"com.wallet.controller"})
+
+@SpringBootApplication(scanBasePackages = {"com.wallet.controller","com.wallet.service"})
 @EnableJpaRepositories("com.wallet.repository")
 @EntityScan("com.wallet.model")
 

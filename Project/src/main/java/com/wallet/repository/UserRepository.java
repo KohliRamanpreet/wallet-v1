@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import com.wallet.model.userDetails;
 
 @Repository
-public interface UserRepository extends CrudRepository<userDetails, Integer> {
+public interface UserRepository extends JpaRepository<userDetails, Integer> {
 }

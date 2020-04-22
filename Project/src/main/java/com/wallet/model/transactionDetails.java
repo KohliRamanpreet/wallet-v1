@@ -1,5 +1,6 @@
 package com.wallet.model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
@@ -13,38 +14,60 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "T_Wallet")
 public class transactionDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
-	private int id;
-	@ManyToOne(cascade =CascadeType.ALL )
-	@JoinColumn(name="User_name",referencedColumnName = "userName")
-	private userDetails user; 
+	@Column(name="transaction_id")
+	private int transactionId;
+	/*
+	 * @ManyToOne(cascade =CascadeType.ALL )
+	 * 
+	 * @JoinColumn(name="User_name",referencedColumnName = "userName") private
+	 * userDetails user;
+	 */
+	@Column(name="account_id")
+	private long accountId;
+	public long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
 	@Column(name="sourceAcc")
 	private long sourceAcc;
 	@Column(name="destAcc")
-	private long destAcc;;
+	private long destAcc;
+	@Column(name="transType")
+	private String type;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Column(name="timeStamp")
-	private String timeStamp;
-	@Column(name="balance")
-	private double balance=0.0;
+	private Date timeStamp;
+	@Column(name="amtTransfered")
+	private double amtTransfered;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public userDetails getUser() {
-		return user;
-	}
-	public void setUser(userDetails user) {
-		this.user = user;
-	}
 	
+public int getTransactionId() {
+		return transactionId;
+	}
+	public void setTransactionId(int transactionId) {
+		this.transactionId = transactionId;
+	}
+	//	public userDetails getUser() {
+//		return user;
+//	}
+//	public void setUser(userDetails user) {
+//		this.user = user;
+//	}
+//	
 	public long getSourceAcc() {
 		return sourceAcc;
 	}
@@ -57,18 +80,25 @@ public class transactionDetails {
 	public void setDestAcc(long destAcc) {
 		this.destAcc = destAcc;
 	}
-	public String getTimeStamp() {
+	public Date getTimeStamp() {
 		return timeStamp;
 	}
-	public void setTimeStamp(String timeStamp) {
+	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	public double getBalance() {
-		return balance;
+	
+	public double getAmtTransfered() {
+		return amtTransfered;
 	}
-	public void setBalance(double balance) {
-		this.balance = balance;
+	public void setAmtTransfered(double amtTransfered) {
+		this.amtTransfered = amtTransfered;
 	}
+	@Override
+	public String toString() {
+		return "transactionDetails [id=" + transactionId + ", sourceAcc=" + sourceAcc + ", destAcc=" + destAcc + ", type=" + type
+				+ ", timeStamp=" + timeStamp + ", amtTransfered=" + amtTransfered + "]";
+	}
+	
 	
 
 

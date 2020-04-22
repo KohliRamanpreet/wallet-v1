@@ -1,6 +1,7 @@
 package com.wallet.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -11,21 +12,25 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name="user_details")
-public class userDetails implements Serializable{
+@Table(name="details_wallet")
+public class userDetails {
+	
+	@Id
+	@Column(name="Account_Id",length=7)
+	private int accountId;
 	@Column(name = "userName")
 	private String userName;
 	@Column(name = "fullName")
 	private String fullName;
-	@Id
 	@Column(name = "pass")
-	private int pass;
+	private String pass;
 	@Column(name = "accNumber")
 	private String accountNo;
 	@Email
@@ -33,8 +38,24 @@ public class userDetails implements Serializable{
 	private String eMail;
 	@Column(name = "pNumber")
 	private int pNumber;
-	@OneToMany
-	private List<transactionDetails> transaction;
+	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = transactionDetails.class)
+	@JoinColumn(name="account_Id",referencedColumnName = "account_id")
+	private List<transactionDetails> transaction=new  ArrayList<>();
+	@Column(name="balance")
+	private float balance;
+	
+	public float getBalance() {
+		return balance;
+	}
+	public void setBalance(float balance) {
+		this.balance = balance;
+	}
+	public int getAccountId() {
+		return accountId;
+	}
+	public int setAccountId(int accountId) {
+		return this.accountId = accountId;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -47,10 +68,10 @@ public class userDetails implements Serializable{
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-	public int getPass() {
+	public String getPass() {
 		return pass;
 	}
-	public void setPass(int pass) {
+	public void setPass(String pass) {
 		this.pass = pass;
 	}
 	public String getAccountNo() {
@@ -70,6 +91,18 @@ public class userDetails implements Serializable{
 	}
 	public void setpNumber(int pNumber) {
 		this.pNumber = pNumber;
+	}
+	public List<transactionDetails> getTransaction() {
+		return transaction;
+	}
+	public void setTransaction(List<transactionDetails> transaction) {
+		this.transaction = transaction;
+	}
+	
+	@Override
+	public String toString() {
+		return "userDetails [userName=" + userName + ", fullName=" + fullName + ", pass=" + pass + ", accountNo="
+				+ accountNo + ", eMail=" + eMail + ", pNumber=" + pNumber + ", transaction=" + transaction + "]";
 	}
 	
 }
