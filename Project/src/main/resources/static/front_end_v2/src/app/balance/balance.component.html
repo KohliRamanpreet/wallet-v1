@@ -1,0 +1,40 @@
+
+    <body>
+        
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">MoneyClip</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li ><a [routerLink]="['/successpage']"><span
+                            class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li><a href=""><span class="	glyphicon glyphicon-globe"></span>
+                            About Us</a></li>
+                    <li><a href=""><span class="glyphicon glyphicon-envelope"></span>
+                            Mail Us</a></li>
+                    <li><a href=""><span class="glyphicon glyphicon-earphone"></span>
+                            Call Us</a></li>
+                </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a [routerLink]="['../successpage/profile']"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+               <li><a [routerLink]="['']"><span class="	glyphicon glyphicon-off"></span>Log Off</a></li>
+               
+                              </ul>
+                            
+                    
+            </div>
+        </nav>
+        <h2>WELCOME balance</h2>
+        <div>
+<div class="jumbotron jumbotron-fluid">
+
+    <h4 *ngFor="let a of user1">
+    {{a.user.eMail}}
+    </h4>
+{{user2|json}}
+
+</div>
+</div>
+        </body>

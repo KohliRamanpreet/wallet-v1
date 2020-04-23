@@ -1,0 +1,54 @@
+<head>
+    <title>Project</title>
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">MoneyClip</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#"><span
+                        class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a href="#"><span class="	glyphicon glyphicon-globe"></span>
+                        About Us</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>
+                        Mail Us</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>
+                        Call Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="loginbox">
+        <img src="/assets/Images/avatar.svg"  class="avatar" alt="User">
+        <h1>Sign Up</h1>
+        <form #enForm="ngForm"  > 
+            <label>User Name</label>
+                   <input type="text" class="form-control" [(ngModel)]=user.userName
+                       placeholder="Enter UserName" id="userName" name="userName" required>
+            
+           <label>Full Name</label>
+                   <input type="text" class="form-control"
+                       placeholder="Enter Full Name" id="fullName" name="fullName" [(ngModel)]=user.fullName required>
+               
+        
+               <label>Password</label>
+                   <input type="password" class="form-control"
+                       placeholder="Password" id="pass" name="pass" [(ngModel)]=user.pass required>
+               
+               <label>Account Number</label>
+                   <input type="number"  class="form-control"
+                       placeholder="Account Number" id="accNumber" name="accNumber" [(ngModel)]=user.accNumber required>
+               <label>Email</label>
+               
+                   <input type="email"  class="form-control"
+                       placeholder="E-mail" id="eMail"  name="eMail" [(ngModel)]=user.eMail required>
+            <label>Phone Number</label>
+                   <input type="number" size="10" class="form-control" name="pNumber"
+                       placeholder="Enter Phone Number" id="pNumber"  [(ngModel)]=user.pNumber  required>
+            <input type="submit" value="Sign-Up" (click)="createUser()" >
+        </form>
+    </div>
+</body>
