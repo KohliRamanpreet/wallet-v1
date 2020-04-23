@@ -70,7 +70,7 @@ public class WalletController {
 		return (List<transactionDetails>) tdRepo.findAll();
 	}
 
-	@PutMapping("/account/{accountId}/deposit")
+	@GetMapping("/account/{accountId}/deposit")
 	public boolean deposit(@PathVariable int accountId, @RequestBody String money) {
 		float amount = Float.parseFloat(money);
 		return walletService.deposit(accountId, amount);
