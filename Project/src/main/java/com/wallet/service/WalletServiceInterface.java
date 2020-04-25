@@ -20,4 +20,11 @@ public interface WalletServiceInterface {
 	boolean withdraw(int accountId, float money);
 	boolean deposit(int accountId, float money);
 
+	
+	boolean depositF(int accountId, float money, int sourceAcc);
+	boolean withdrawF(int accountId, float money, int senderId);
+	boolean deleteAccountById(int accountID);
+	userDetails updateAccount1(userDetails customer);
+	boolean fundTransfer1(int senderId, int receiverId, float money);
+
 }

@@ -1,0 +1,80 @@
+
+
+ @import url('https://fonts.googleapis.com/css?family=Asap:500i');
+
+ .navbar {
+     background: hsl(197, 100%, 40%);
+     /* //min-height: 50px; */
+    
+ }
+ /* .navbar-nav>li{
+     height: 100%;
+ }
+ .navbar-nav>li>a{
+     padding-top: 0px;
+     padding-bottom: 0px;
+     line-height: 110%;
+     height: 100%;
+ } */
+ body {
+     margin: 0;
+     padding: 0;
+     font-family: 'Asap', sans-serif;
+     
+ }
+ .loginbox a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+}
+
+.loginbox a:hover {
+    color: #FFC107;
+    transition: 1s;
+}
+.loginbox input[type="submit"]:hover {
+    cursor: pointer;
+    background: silver;
+    transition: cubic-bezier(0.6, -0.28, 0.735, 0.045); 
+   
+;
+}
+.loginbox input[type="submit"]
+{  
+    width:120px;
+    background-color: hsla(197, 100%, 50%, 0.479);
+    height: 50px;
+    color: black;
+    border:solid 2px cornsilk;
+    border-radius: 20%;
+   
+}
+h4.impact {
+    font-family: "Lucida Console", Courier, monospace;
+  }
+.row
+{
+    display:grid;
+    background-color:black;
+    grid-template-columns: repeat(12,5fr);
+    grid-gap: 20px;
+    color: cornsilk;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.row1
+{
+    display:grid;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:black;
+    color: white;
+    text-align: center;
+  }

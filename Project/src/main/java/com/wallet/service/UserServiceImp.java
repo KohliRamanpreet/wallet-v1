@@ -26,11 +26,27 @@ public class UserServiceImp implements WalletServiceInterface {
 					.getAccountId();
 			user.setAccountId(maxId + 1);
 		}
-
+		String encryptedPassword = new String(passwordEncryptor(user.getPass().getBytes()));
+		user.setPass(encryptedPassword);
+		String encryptedTpin = new String(passwordEncryptor(user.getPin().getBytes()));
+		user.setPin(encryptedTpin);
 		// TODO Auto-generated method stub
 		return userRepository.save(user);
 	}
+	@Override
+	public userDetails updateAccount1(userDetails customer) {
+		String encryptedPassword = new String(passwordEncryptor(customer.getPass().getBytes()));
+		customer.setPass(encryptedPassword);
+		String encryptedTpin = new String(passwordEncryptor(customer.getPin().getBytes()));
+		customer.setPin(encryptedTpin);
+		return userRepository.save(customer);
+	}
 
+	@Override
+	public boolean deleteAccountById(int accountID) {
+		userRepository.deleteById(accountID);
+		return true;
+	}
 	@Override
 	public List<userDetails> findAllAccount() {
 		List<userDetails> allCustomers = userRepository.findAll();
@@ -39,11 +55,11 @@ public class UserServiceImp implements WalletServiceInterface {
 			String decryptedPassword = new String(passwordDecryptor(customer.getPass().getBytes()));
 			customer.setPass(decryptedPassword);
 
-			/*
-			 * String decryptedTpin = new
-			 * String(passwordDecryptor(customer.getTransactionPin().getBytes()));
-			 * customer.setTransactionPin(decryptedTpin);
-			 */
+			
+			  String decryptedTpin = new
+			  String(passwordDecryptor(customer.getPin().getBytes()));
+			  customer.setPin(decryptedTpin);
+			 
 			return customer;
 		}).collect(Collectors.toList());
 		return allAccounts;
@@ -51,28 +67,18 @@ public class UserServiceImp implements WalletServiceInterface {
 
 	}
 
-	/*
-	 * @Override public byte[] passwordEncryptor(byte[] password) { byte[] encrypted
-	 * = new byte[password.length]; for (int i = 0; i < password.length; i++) {
-	 * encrypted[i] = (byte)((i%2 == 0) ? password[i] + 1 : password[i] - 1); }
-	 * return encrypted; }
-	 * 
-	 * @Override public byte[] passwordDecryptor(byte[] password) { byte[] encrypted
-	 * = new byte[password.length]; for (int i = 0; i < password.length; i++) {
-	 * encrypted[i] = (byte)((i%2 == 0) ? password[i] - 1 : password[i] + 1); }
-	 * return encrypted; }
-	 */
+	
 	@Override
 	public userDetails findAccountById(int accountId) {
 
 		userDetails customer = userRepository.findById(accountId).get();
 		String decryptedPassword = new String(passwordDecryptor(customer.getPass().getBytes()));
 		customer.setPass(decryptedPassword);
-		/*
-		 * String decryptedTpin = new
-		 * String(passwordDecryptor(customer.getTransactionPin().getBytes()));
-		 * customer.setTransactionPin(decryptedTpin);
-		 */
+		
+		  String decryptedTpin = new
+		  String(passwordDecryptor(customer.getPin().getBytes()));
+		  customer.setPin(decryptedTpin);
+		 
 		return customer;
 
 	}
@@ -122,7 +128,36 @@ public class UserServiceImp implements WalletServiceInterface {
 		updateAccount(customer);
 		return true;
 	}
+	@Override
+	public boolean depositF(int accountId, float money,int sourceAcc) {
+		userDetails customer = findAccountById(accountId);
+		customer.setBalance(customer.getBalance() + money);
 
+		transactionDetails tData = new transactionDetails();
+		tData.setAccountId(accountId);
+		tData.setType("fund recieved");
+		tData.setSourceAcc(sourceAcc);
+		tData.setAmtTransfered(money);
+
+		java.util.Date dateJava = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(dateJava.getTime());
+		tData.setTimeStamp(date);
+
+		customer.getTransaction().add(tData);
+		updateAccount(customer);
+		return true;
+	}
+
+	
+	@Override
+	public userDetails updateAccount(userDetails customer) {
+		String encryptedPassword = new String(passwordEncryptor(customer.getPass().getBytes()));
+		customer.setPass(encryptedPassword);
+		 String encryptedTpin = new
+		String(passwordEncryptor(customer.getPin().getBytes()));
+		 customer.setPin(encryptedTpin);
+		return userRepository.save(customer);
+	}
 	@Override
 	public boolean withdraw(int accountId, float money) {
 		userDetails customer = findAccountById(accountId);
@@ -141,26 +176,15 @@ public class UserServiceImp implements WalletServiceInterface {
 		updateAccount(customer);
 		return true;
 	}
-
 	@Override
-	public userDetails updateAccount(userDetails customer) {
-		String encryptedPassword = new String(passwordEncryptor(customer.getPass().getBytes()));
-		customer.setPass(encryptedPassword);
-		// String encryptedTpin = new
-		// String(passwordEncryptor(customer.getTransactionPin().getBytes()));
-		// customer.setTransactionPin(encryptedTpin);
-		return userRepository.save(customer);
-	}
-
-	@Override
-	public boolean fundTransfer(int senderId, int receiverId, float money) {
-		userDetails customer = findAccountById(senderId);
+	public boolean withdrawF(int accountId, float money,int senderId) {
+		userDetails customer = findAccountById(accountId);
 		customer.setBalance(customer.getBalance() - money);
 
 		transactionDetails tData = new transactionDetails();
-		tData.setSourceAcc(senderId);
-		tData.setType("Fund Transfered to " + receiverId);
-		tData.setDestAcc(receiverId);
+		tData.setAccountId(accountId);
+		tData.setType("Fund Transfered");
+		tData.setDestAcc(senderId);
 		tData.setAmtTransfered(-money);
 
 		java.util.Date dateJava = new java.util.Date();
@@ -169,14 +193,51 @@ public class UserServiceImp implements WalletServiceInterface {
 
 		customer.getTransaction().add(tData);
 		updateAccount(customer);
+		return true;
+	}
 
-		customer = findAccountById(receiverId);
+
+	@Override
+	public boolean fundTransfer(int senderId, int receiverId, float money) {
+		userDetails customer = findAccountById(senderId);
+		customer.setBalance(customer.getBalance() - money);
+		transactionDetails tData = new transactionDetails();
+		tData.setAccountId(senderId);
+		tData.setSourceAcc(senderId);
+		tData.setRemAmt(customer.getBalance() - money);
+		tData.setType("Fund Transfered to " + receiverId);
+		tData.setDestAcc(receiverId);
+		tData.setAmtTransfered(-money);
+		java.util.Date dateJava = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(dateJava.getTime());
+		tData.setTimeStamp(date);
+
+		customer.getTransaction().add(tData);
+		updateAccount(customer);
+		
+		return fundTransfer1( senderId, receiverId,  money);
+
+	
+	}
+	@Override
+	public boolean fundTransfer1(int senderId, int receiverId, float money) {
+		userDetails customer = findAccountById(receiverId);
 		customer.setBalance(customer.getBalance() + money);
-		tData.setType("Fund Transfered from " + senderId);
-		tData.setAmtTransfered(money);
+		transactionDetails tData = new transactionDetails();
+		tData.setAccountId(senderId);
+		tData.setSourceAcc(senderId);
+		tData.setRemAmt(customer.getBalance() + money);
+		tData.setType("Fund recieved from " + senderId);
+		tData.setDestAcc(receiverId);
+		tData.setAmtTransfered(+money);
+		java.util.Date dateJava = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(dateJava.getTime());
+		tData.setTimeStamp(date);
+
 		customer.getTransaction().add(tData);
 		updateAccount(customer);
 		return true;
 	}
+
 
 }

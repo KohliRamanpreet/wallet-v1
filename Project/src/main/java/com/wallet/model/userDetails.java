@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name="details_wallet")
+@Table(name="details_wallets")
 public class userDetails {
 	
 	@Id
@@ -37,7 +37,17 @@ public class userDetails {
 	@Column(name = "eMail")
 	private String eMail;
 	@Column(name = "pNumber")
-	private int pNumber;
+	private long pNumber;
+	@Column(name="Pin")
+	private String pin;
+	
+	public String getPin() {
+		return pin;
+	}
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = transactionDetails.class)
 	@JoinColumn(name="account_Id",referencedColumnName = "account_id")
 	private List<transactionDetails> transaction=new  ArrayList<>();
@@ -86,10 +96,10 @@ public class userDetails {
 	public void seteMail(String eMail) {
 		this.eMail = eMail;
 	}
-	public int getpNumber() {
+	public long getpNumber() {
 		return pNumber;
 	}
-	public void setpNumber(int pNumber) {
+	public void setpNumber(long pNumber) {
 		this.pNumber = pNumber;
 	}
 	public List<transactionDetails> getTransaction() {

@@ -1,0 +1,163 @@
+
+    <body>
+         
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <span class="navbar-brand" style="color: black;"><strong>MoneyClip</strong></span>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li  style="color: black;"><a [routerLink]="['/successpage']"><span style="color: black;"
+                            class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li style="color: black;"><a href=""><span style="color: black;" class="	glyphicon glyphicon-globe"></span>
+                            About Us</a></li>
+                    <li style="color: black;"><a href=""><span style="color: black;" class="glyphicon glyphicon-envelope"></span>
+                            Mail Us</a></li>
+                    <li style="color: black;"><a href=""><span style="color: black;"  class="glyphicon glyphicon-earphone"></span>
+                            Call Us</a></li>
+                </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li style="color: black;"><a [routerLink]="['../successpage/profile']"><span style="color: black;" class="glyphicon glyphicon-user"></span>Profile</a></li>
+               <li style="color: black;"><a [routerLink]="['']"><span style="color: black;" class="	glyphicon glyphicon-off"></span>Log Off</a></li>
+               
+                              </ul>
+                            
+                    
+            </div>
+        </nav>
+        
+        
+    
+        <h2>WELCOME to MoneyClip {{user.pin}}</h2>
+        <div *ngIf="(transType==1 && !transFlag)">
+          
+            <form (ngSubmit)="proceedDeposit(depositForm)" #depositForm="ngForm">
+                <div class="form group">
+                    <label for="money">Amount to be added in the wallet</label>
+                    <input size="5" type="number" name="money" class="form-control" ngModel #Money="ngModel">
+                  </div>
+                    
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="Proceed" [disabled]="!depositForm.form.valid">
+            </form>
+
+        </div>
+        <div *ngIf = "(transType == 1 && transFlag)">
+            <form (ngSubmit)="deposit(depositForm)" #depositForm="ngForm">
+              <div class="form group">
+                <label for="pin">Enter Transaction Pin to proceed...</label>
+                <input type="password" size="5" name="pin" class="form-control" ngModel #pin="ngModel" patten="^[0-9]{4-8}$"> 
+                <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
+                  <small class="text-danger">
+                      <small *ngIf="pin.errors.required ">
+                          PIN!
+                      </small>
+                      <small *ngIf="pin.errors.pattern">
+                           All digits.
+                      </small>
+
+                  </small>
+              </div>
+              
+              </div>
+              
+              <input type="submit" value="Deposit" class="btn btn-primary" [disabled]= "!depositForm.form.valid">
+            </form>
+          </div>
+          
+        
+            <div *ngIf="(transType==2 && !transFlag)">
+            <form (ngSubmit)="proceedWithdraw(withdrawForm)" #withdrawForm="ngForm">
+              <div class="form group">
+                  <label for="money">Amount to be deducted from the wallet</label>
+                  <input type="number" name="money" size="5" class="form-control" ngModel #Money="ngModel">
+                </div>
+                  <!-- </div>
+                  <small [hidden]="Money.valid || Money.pristline">
+                      Please Enter Valid amoont.
+                  </small> 
+                  <small [hidden]="!negativeAmont">
+                      Please enter positive amount!
+                  </small> -->
+                  <br>
+                  <input type="submit" value="Proceed" [disabled]="!withdrawForm.form.valid">
+          </form>
+          </div>
+          <div *ngIf = "(transType == 2 && transFlag)">
+            <form (ngSubmit)="withdraw(withdrawForm)" #withdrawForm="ngForm">
+              <div class="form group">
+                <label for="pin">Enter Transaction Pin to proceed...</label>
+                <input type="pin" name="pin" size="5" class="form-control" ngModel #pin="ngModel" patten="^[0-9]{4-8}$"> 
+             
+                <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
+                  <small class="text-danger">
+                      <small *ngIf="pin.errors.required ">
+                          PIN!
+                      </small>
+                      <small *ngIf="pin.errors.pattern">
+                           All digits.
+                      </small>
+
+                  </small>
+              </div>
+             
+              </div>
+              
+              <input type="submit" value="DeCredit" class="btn btn-primary" [disabled]= "!withdrawForm.form.valid">
+            </form>
+          </div>
+          <div *ngIf="(transType==3 && !transFlag)">
+            <h4>{{errorMessage}}</h4>
+            <form (ngSubmit)="proceedFundTransfer(fundForm)" #fundForm="ngForm">
+              <div class="form group">
+                  <label for="money">Amount to be Sent</label>
+                  <input type="number" name="money" size="5" class="form-control" ngModel #Money="ngModel">
+                </div>
+                <div class="form group">
+                  <label for="money">Reciever AccountId</label>
+                  <input type="number" size="5" name="rId" class="form-control" ngModel #Money="ngModel">
+                </div>
+                <div class="form group">
+                  <label for="money">Re-enter Reciever AccountId</label>
+                  <input type="number" size="5"  name="rRId" class="form-control" ngModel #Money="ngModel">
+                </div>
+                  <br>
+                  <input type="submit" value="Proceed" class="btn btn-primary" [disabled]="!fundForm.form.valid">
+          </form>
+          </div>
+          <i></i>
+          <div *ngIf="(transType==3 && transFlag)"> 
+            
+            <form (ngSubmit)="fundTransfer(withdrawForm)" #withdrawForm="ngForm">
+              <div class="form group">
+                <label for="transactionPin">Enter Transaction Pin to proceed...</label>
+                <input type="password" size="5" name="pin" class="form-control" ngModel #pin="ngModel" patten="^[0-9]{4,8}$"> 
+             
+                <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
+                  <small class="text-danger">
+                      <small *ngIf="pin.errors.required ">
+                          PIN!
+                      </small>
+                      <small *ngIf="pin.errors.pattern">
+                           All digits.
+                      </small>
+
+                  </small>
+              </div>
+              </div>
+              
+              <input type="submit" size="5" value="DeCredit" class="btn btn-primary" [disabled]= "!withdrawForm.form.valid">
+            </form>
+          </div>
+          <div class="footer" >
+
+    
+            <div class="footer-copyright text-center ">© 2020 Copyright:
+              <a> MoneyClip.com</a>
+            </div>
+            
+           
+          
+        </div>
+        </body>

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import com.wallet.model.loginDetails;
+//import com.wallet.model.loginDetails;
 import com.wallet.model.transactionDetails;
 import com.wallet.model.userDetails;
 import com.wallet.repository.UserRepository;
-import com.wallet.repository.loginDetailsRepository;
+//import com.wallet.repository.loginDetailsRepository;
 import com.wallet.repository.transactionDetailRepository;
 import com.wallet.service.WalletServiceInterface;
 
@@ -30,8 +30,8 @@ import com.wallet.service.WalletServiceInterface;
 public class WalletController {
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private loginDetailsRepository ldRepo;
+	//@Autowired
+	//private loginDetailsRepository ldRepo;
 	@Autowired
 	private transactionDetailRepository tdRepo;
 	@Autowired
@@ -69,11 +69,22 @@ public class WalletController {
 	public List<transactionDetails> getTransaction() {
 		return (List<transactionDetails>) tdRepo.findAll();
 	}
+	@GetMapping("/exist/{id}")
+	public boolean existById(@PathVariable int id)
+	{
+		System.out.println( userRepository.existsById(id));
+		return userRepository.existsById(id);
+	}
 
-	@GetMapping("/account/{accountId}/deposit")
-	public boolean deposit(@PathVariable int accountId, @RequestBody String money) {
-		float amount = Float.parseFloat(money);
-		return walletService.deposit(accountId, amount);
+	@PutMapping("/account/{accountId}/deposit")
+	public boolean deposit(@PathVariable int accountId,@RequestBody int  money) {
+		//float amount = Float.parseFloat(money);
+		System.out.println(userRepository.findById(accountId));
+		return walletService.deposit(accountId, money);
+	}
+	@PutMapping("/account/{accountId}/fundTransfer2/{receiverId}")
+	public boolean fundTransfer2(@PathVariable int accountId,@PathVariable int receiverId, @RequestBody float amount) {
+		return walletService.fundTransfer(accountId, receiverId, amount);
 	}
 
 	@PutMapping("/account/{accountId}/withdraw")
@@ -82,9 +93,15 @@ public class WalletController {
 		return walletService.withdraw(accountId, amount);
 	}
 
-	@PutMapping("/account/{accountId}/fundTransfer/{receiverId}/{amount}")
-	public boolean fundTransfer(@PathVariable int accountId, @PathVariable int receiverId, @PathVariable float amount) {
-		return walletService.fundTransfer(accountId, receiverId, amount);
+	@PutMapping("/account/{accountId}/fundTransfer/{receiverId}")
+	public boolean fundTransfer(@PathVariable int accountId, @PathVariable int receiverId, @RequestBody float amount) {
+		// walletService.withdrawF(accountId, amount, receiverId);
+		 return walletService.depositF(receiverId, amount, accountId);
 	}
+	@PutMapping("/account/{accountId}/fundTransfer1/{receiverId}")
+	public boolean fundTransfer1(@PathVariable int accountId, @PathVariable int receiverId, @RequestBody float amount) {
+		return walletService.withdrawF(accountId, amount, receiverId);
+	}
+	
 
 }

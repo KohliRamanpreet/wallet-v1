@@ -31,33 +31,29 @@ public class transactionDetails {
 	 */
 	@Column(name="account_id")
 	private long accountId;
-	public long getAccountId() {
-		return accountId;
-	}
-	public void setAccountId(long accountId) {
-		this.accountId = accountId;
-	}
 	@Column(name="sourceAcc")
 	private long sourceAcc;
 	@Column(name="destAcc")
 	private long destAcc;
+	
 	@Column(name="transType")
 	private String type;
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+	@Column(name="remAmt")
+	public float remAmt;
 	@Column(name="timeStamp")
 	private Date timeStamp;
 	@Column(name="amtTransfered")
 	private double amtTransfered;
-	
-	
 public int getTransactionId() {
 		return transactionId;
 	}
+
+public String getType() {
+	return type;
+}
+public void setType(String type) {
+	this.type = type;
+}
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
@@ -67,6 +63,12 @@ public int getTransactionId() {
 //	public void setUser(userDetails user) {
 //		this.user = user;
 //	}
+	public long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
 //	
 	public long getSourceAcc() {
 		return sourceAcc;
@@ -85,6 +87,13 @@ public int getTransactionId() {
 	}
 	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+	public float getRemAmt() {
+		return remAmt;
+	}
+
+	public void setRemAmt(float remAmt) {
+		this.remAmt = remAmt;
 	}
 	
 	public double getAmtTransfered() {
