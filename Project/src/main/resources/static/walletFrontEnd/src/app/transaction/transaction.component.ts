@@ -10,7 +10,6 @@ import { Transaction } from '../models/Transaction.model';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-
 transFlag=false;
 transType;
 money;
@@ -23,11 +22,7 @@ check;
 errorMessage;
 user1=new Detail();
   constructor(private _projectService:ProjectService,private _router:Router) { 
-
-
-
-
-  }
+ }
 
   ngOnInit(): void {
   this.user=this._projectService.getCurrentUser();
@@ -48,13 +43,13 @@ proceedDeposit (depositForm) {
   deposit(depositForm) {
     if (depositForm.value.pin == this.user.pin) {
       this._projectService.deposit(this.user.accountId, this.money).subscribe();
-    //  setTimeout(() => {
+  
         this._projectService.getUserbyID(this.user.accountId).subscribe((customer) => {
           this._projectService.setCurrentUser(customer);
           this.user1=this._projectService.getCurrentUser();
           this._projectService.setBalance(this.user1.balance);
         });
-     // }, 4000);
+   
       this._router.navigate(['../successpage']);
     } else {
       alert("Incorrect Pin")
@@ -73,13 +68,13 @@ proceedDeposit (depositForm) {
   withdraw(withdrawForm) {
     if (withdrawForm.value.pin == this.user.pin) {
       this._projectService.Withdraw(this.user.accountId, this.money).subscribe();
-    // setTimeout(() => {
+    
         this._projectService.getUserbyID(this.user.accountId).subscribe((customer) => {
           this._projectService.setCurrentUser(customer);
 this.user1=this._projectService.getCurrentUser();
           this._projectService.setBalance(this.user1.balance);
         });
-     // }, 4000);
+    
       this._router.navigate(['../successpage']);
     } else {
       alert("Incorrect Pin")
@@ -117,8 +112,7 @@ this._projectService.existUserById(this.recieverId).subscribe((exists)=>{
   }
   edit(form)
   {
-    //this._projectService.setCurrentUser(this.user);
-    //this.user=this._projectService.getCurrentUser();
+   
     console.log(this.user);
     this._projectService.updateAccount(this.user).subscribe();
     alert("Profile Updates");
@@ -128,15 +122,11 @@ this._projectService.existUserById(this.recieverId).subscribe((exists)=>{
 
     if (withdrawForm.value.pin == this.user.pin) {
       this._projectService.transferFund(this.user.accountId,this.recieverId, this.money).subscribe();
-     // this._projectService.transferFund1(this.user.accountId,this.recieverId, this.money).subscribe();
-
-    // setTimeout(() => {
         this._projectService.getUserbyID(this.user.accountId).subscribe((customer) => {
           this._projectService.setCurrentUser(customer);
           this.user1=this._projectService.getCurrentUser();
           this._projectService.setBalance(this.user1.balance);
         });
-     // }, 4000);
       this._router.navigate(['../successpage']);
     } else {
       alert("Incorrect Pin")
