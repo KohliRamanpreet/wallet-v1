@@ -72,7 +72,7 @@
                        <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
                         <small class="text-danger">
                             <small *ngIf="pin.errors.required ">
-                                PIN is mandatory,len max:8,min:4.
+                                PIN is mandatory
                             </small>
                             <small *ngIf="pin.errors.pattern">
                                 len max:8,min:4, All digits.
@@ -83,7 +83,7 @@
                
                <label>Account Number</label>
                <input type="text" name="acc" 
-               [(ngModel)]=user.accNumber class="form-control" placeholder="Account Number" pattern="^[0-9]{16}$"
+               [(ngModel)]=user.accNumber class="form-control" placeholder="Account Number" pattern="^[0-9]{12}$"
                 #acc="ngModel"
                  required/>
                  <div *ngIf="acc.invalid && (acc.dirty || acc.touched)">
@@ -92,7 +92,7 @@
                             Account No. mandatory.
                         </small>
                         <small *ngIf=" acc.errors.pattern">
-                            Account No. 16 digit.
+                            Account No. 12 digit.
                         </small>
                         
                     </small>

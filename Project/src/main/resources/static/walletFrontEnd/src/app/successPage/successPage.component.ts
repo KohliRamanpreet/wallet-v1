@@ -39,13 +39,20 @@ onClickWithdraw()
   
 
   }
-  onClickTransaction()
+  
+  onClickEdit()
   {
     this.transType=4;
     this._projectService.setTransType(this.transType);
     this.router.navigate(['/transaction']);
   }
+onClickDelete()
+{
+ this.transType=5;
+ this._projectService.setTransType(this.transType);
+ this.router.navigate(['/transaction']);
 
+}
   ngOnInit(): void {
     
   }

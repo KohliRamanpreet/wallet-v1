@@ -30,7 +30,7 @@
             <div class="col-sm-4" >
                 
                     <h4 class="impact">
-                    Hi! {{user.fullName}}
+                    Hi! {{user.fullName}}<br>
                     Let’s get you set up to send, spend, get paid, and more.
                     </h4>
                
@@ -51,8 +51,8 @@
                 <input type="submit"  value="DeCredit it " name="submit" (click)="onClickWithdraw() ">
                <input type="submit" (click)="onClickTransfer()" value="Transfer Fund" name="submit">
                <input type="submit" [routerLink]="['/print']" value="View Transactions" name="submit">
-               <input type="submit" (click)="onClickTransfer()" value="Edit profile" name="submit">
-               <input type="submit" [routerLink]="['/print']" value="Delete Account" name="submit">
+               <input type="submit" (click)="onClickEdit()" value="Edit profile" name="submit">
+               <input type="submit" (click)="onClickDelete()" value="Delete Account" name="submit">
                
             </div>
             </div>

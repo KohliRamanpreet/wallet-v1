@@ -12,7 +12,7 @@ export class Detail
     transaction: [];
     balance:String;
     pin:String;
-  //  pin:Number;
+  
 
 
 }

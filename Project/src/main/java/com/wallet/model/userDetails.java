@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name="details_wallets")
+@Table(name="wallets_user")
 public class userDetails {
 	
 	@Id
@@ -32,7 +32,7 @@ public class userDetails {
 	@Column(name = "pass")
 	private String pass;
 	@Column(name = "accNumber")
-	private String accountNo;
+	private long accNumber;
 	@Email
 	@Column(name = "eMail")
 	private String eMail;
@@ -84,12 +84,7 @@ public class userDetails {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public String getAccountNo() {
-		return accountNo;
-	}
-	public void setAccountNo(String accountNo) {
-		this.accountNo = accountNo;
-	}
+	
 	public String geteMail() {
 		return eMail;
 	}
@@ -102,17 +97,25 @@ public class userDetails {
 	public void setpNumber(long pNumber) {
 		this.pNumber = pNumber;
 	}
+	public long getAccNumber() {
+		return accNumber;
+	}
+	public void setAccNumber(long accNumber) {
+		this.accNumber = accNumber;
+	}
 	public List<transactionDetails> getTransaction() {
 		return transaction;
 	}
 	public void setTransaction(List<transactionDetails> transaction) {
 		this.transaction = transaction;
 	}
-	
 	@Override
 	public String toString() {
-		return "userDetails [userName=" + userName + ", fullName=" + fullName + ", pass=" + pass + ", accountNo="
-				+ accountNo + ", eMail=" + eMail + ", pNumber=" + pNumber + ", transaction=" + transaction + "]";
+		return "userDetails [accountId=" + accountId + ", userName=" + userName + ", fullName=" + fullName + ", pass="
+				+ pass + ", accNumber=" + accNumber + ", eMail=" + eMail + ", pNumber=" + pNumber + ", pin=" + pin
+				+ ", transaction=" + transaction + ", balance=" + balance + "]";
 	}
+	
+	
 	
 }

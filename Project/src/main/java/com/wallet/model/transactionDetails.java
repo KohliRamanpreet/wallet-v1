@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "T_Wallet")
+@Table(name = "T_Wallets")
 public class transactionDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

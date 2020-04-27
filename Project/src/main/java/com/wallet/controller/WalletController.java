@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +45,7 @@ public class WalletController {
 
 	@GetMapping("/account/{accountId}")
 	public userDetails getAccount(@PathVariable int accountId) {
-		System.out.println(userRepository.findById(accountId).get() + "Hii");
+		
 		System.out.println(walletService.findAccountById(accountId) + "hello");
 		return walletService.findAccountById(accountId);
 
@@ -101,6 +102,15 @@ public class WalletController {
 	@PutMapping("/account/{accountId}/fundTransfer1/{receiverId}")
 	public boolean fundTransfer1(@PathVariable int accountId, @PathVariable int receiverId, @RequestBody float amount) {
 		return walletService.withdrawF(accountId, amount, receiverId);
+	}
+	@PutMapping("/account")
+	public userDetails updateAccount(@RequestBody userDetails customer){
+		return walletService.updateAccount(customer);
+	}
+	@DeleteMapping("/account/{accountId}")
+	public boolean deleteAccount(@PathVariable int accountId){
+		walletService.deleteAccountById(accountId);
+		return true; 
 	}
 	
 

@@ -55,9 +55,18 @@ getTransaction(accountId:Number)
   //retrun Observable.throw(error||'SERVER ERROR');
 //}
 
+updateAccount(customer: Detail) {
+  return this.http.put(this.userUrl + '/account', customer);
+  // this.options)
+   // .pipe(map((response: Response) => response.json()))
+    //.pipe(catchError(this.errorHandler));
+}
 
-
-
+deleteAccount(id: Number) {
+  return this.http.delete(this.userUrl + '/account/' + id);
+  // this.options).pipe(map((response: Response) => response.json()))
+    //.pipe(catchError(this.errorHandler));
+}
 existUserById(id:Number)
 {
   return this.http.get(this.userUrl+'/exist/'+id);

@@ -29,7 +29,7 @@
         
         
     
-        <h2>WELCOME to MoneyClip {{user.pin}}</h2>
+        <h2>WELCOME to MoneyClip</h2>
         <div *ngIf="(transType==1 && !transFlag)">
           
             <form (ngSubmit)="proceedDeposit(depositForm)" #depositForm="ngForm">
@@ -47,7 +47,7 @@
             <form (ngSubmit)="deposit(depositForm)" #depositForm="ngForm">
               <div class="form group">
                 <label for="pin">Enter Transaction Pin to proceed...</label>
-                <input type="password" size="5" name="pin" class="form-control" ngModel #pin="ngModel" patten="^[0-9]{4-8}$"> 
+                <input type="password" size="8" name="pin" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
                 <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
                   <small class="text-danger">
                       <small *ngIf="pin.errors.required ">
@@ -88,7 +88,7 @@
             <form (ngSubmit)="withdraw(withdrawForm)" #withdrawForm="ngForm">
               <div class="form group">
                 <label for="pin">Enter Transaction Pin to proceed...</label>
-                <input type="pin" name="pin" size="5" class="form-control" ngModel #pin="ngModel" patten="^[0-9]{4-8}$"> 
+                <input type="password" name="pin" size="5" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
              
                 <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
                   <small class="text-danger">
@@ -132,7 +132,7 @@
             <form (ngSubmit)="fundTransfer(withdrawForm)" #withdrawForm="ngForm">
               <div class="form group">
                 <label for="transactionPin">Enter Transaction Pin to proceed...</label>
-                <input type="password" size="5" name="pin" class="form-control" ngModel #pin="ngModel" patten="^[0-9]{4,8}$"> 
+                <input type="password" size="5" name="pin" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
              
                 <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
                   <small class="text-danger">
@@ -148,6 +148,48 @@
               </div>
               
               <input type="submit" size="5" value="DeCredit" class="btn btn-primary" [disabled]= "!withdrawForm.form.valid">
+            </form>
+          </div>
+          <div *ngIf="transType==4">
+            <form (ngSubmit)="edit(e)" #e="ngForm">
+              Edit:
+              <br>
+              <div class="form group">
+                <label>Name</label><br>
+                <input type="text" name="name" placeholder={{user.fullName}} pattern="^[A-Za-z\s]{3,100}$" #name="ngModel" [(ngModel)]=user.fullName>
+                <div *ngIf="name.invalid "> <small *ngIf="name.errors.pattern">  Invalid Name.
+              </small> </div>
+             </div>
+              <div class="form group">
+                <label>User Name</label><br>
+                <input type="text" name="name1" placeholder={{user.userName}} pattern="^[A-Za-z0-9\s]{4,20}$" #name1="ngModel" [(ngModel)]=user.userName>
+                <div *ngIf="name1.invalid "> <small *ngIf="name1.errors.pattern">  Invalid User Name.
+                </small> </div>
+              </div>
+              <div class="form group">
+                <label>Mobile Number</label><br>
+                <input type="text" name="no" placeholder={{user.pNumber}} pattern="^[0-9]{10}$" #no="ngModel" [(ngModel)]=user.pNumber>
+                <div *ngIf="no.invalid "> <small *ngIf="no.errors.pattern"> Invalid Mobile Number.
+                </small> </div>
+              </div>
+              <div class="form group">
+                <label>E-Mail</label><br>
+                <input type="text" name="email" placeholder={{user.eMail}} pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel" [(ngModel)]=user.eMail>
+                <div *ngIf="email.invalid ">   <small *ngIf="email.errors.pattern"> Invalid Email Id.
+                </small> </div>
+              </div>
+              <input type="submit"  value="confirm" class="btn btn-primary" [disabled]= "!e.form.valid">
+    
+
+            </form>
+           
+
+          </div>
+          <div class="jumbotron jumbotron-fluid" *ngIf="transType==5">
+
+            <form (ngSubmit)="delete()">
+              <h3>Are you sure you want to delete your account?</h3>
+              <input type="submit" value="Delete Account Permanently" class="btn btn-primary">
             </form>
           </div>
           <div class="footer" >

@@ -46,7 +46,7 @@ proceedDeposit (depositForm) {
   }
 
   deposit(depositForm) {
-    if (depositForm.value.pin == "this.user.pin") {
+    if (depositForm.value.pin == this.user.pin) {
       this._projectService.deposit(this.user.accountId, this.money).subscribe();
     //  setTimeout(() => {
         this._projectService.getUserbyID(this.user.accountId).subscribe((customer) => {
@@ -115,6 +115,15 @@ this._projectService.existUserById(this.recieverId).subscribe((exists)=>{
   }
 
   }
+  edit(form)
+  {
+    //this._projectService.setCurrentUser(this.user);
+    //this.user=this._projectService.getCurrentUser();
+    console.log(this.user);
+    this._projectService.updateAccount(this.user).subscribe();
+    alert("Profile Updates");
+    this._router.navigate(['../successpage']);
+  }
   fundTransfer(withdrawForm) {
 
     if (withdrawForm.value.pin == this.user.pin) {
@@ -132,6 +141,12 @@ this._projectService.existUserById(this.recieverId).subscribe((exists)=>{
     } else {
       alert("Incorrect Pin")
     }
+  }
+  delete()
+  {
+    this._projectService.deleteAccount(this.user.accountId).subscribe();
+    this._router.navigate(['']);
+
   }
 
 }
