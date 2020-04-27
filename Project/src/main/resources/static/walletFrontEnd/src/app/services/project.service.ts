@@ -1,19 +1,11 @@
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import {Http,Response,Headers,RequestOptions} from '@angular/common/http';
-
 import { Detail} from '../models/Detail.model';
 import { Observable,throwError } from 'rxjs';
 import {Login} from '../models/Login.model';
 import {Subject} from 'rxjs'
 import {Transaction} from '../models/Transaction.model';
 import {map,catchError} from 'rxjs/operators';
-
-
-/*const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-}; */
-
 @Injectable({providedIn: 'root'})
 export class ProjectService {
   headers= new Headers({ 'Content-Type': 'application/json' });
@@ -23,8 +15,6 @@ currBalance;
   private type;
 	private userUrl= 'http://localhost:8080/api';
   constructor(private http:HttpClient) { }
-
-
 setTransType(type)
 {
 this.type=type;
@@ -40,32 +30,19 @@ getUserbyID(id:Number)
 deposit(accountId:Number,money:String)
 {
   return this.http.put(this.userUrl+'/account/'+accountId+'/deposit',money);
-  //.pipe(map((response:
-    //Response)=>response.json()));
+;
 }
 Withdraw(accountId:Number,money:String)
 {
   return this.http.put(this.userUrl+'/account/'+accountId+'/withdraw',money);
 }
-getTransaction(accountId:Number)
-{
-
-}
-//errorHandler(error:Response){
-  //retrun Observable.throw(error||'SERVER ERROR');
-//}
 
 updateAccount(customer: Detail) {
   return this.http.put(this.userUrl + '/account', customer);
-  // this.options)
-   // .pipe(map((response: Response) => response.json()))
-    //.pipe(catchError(this.errorHandler));
 }
 
 deleteAccount(id: Number) {
   return this.http.delete(this.userUrl + '/account/' + id);
-  // this.options).pipe(map((response: Response) => response.json()))
-    //.pipe(catchError(this.errorHandler));
 }
 existUserById(id:Number)
 {
