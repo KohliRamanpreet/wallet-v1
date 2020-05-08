@@ -23,19 +23,12 @@ public class transactionDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="transaction_id")
 	private int transactionId;
-	/*
-	 * @ManyToOne(cascade =CascadeType.ALL )
-	 * 
-	 * @JoinColumn(name="User_name",referencedColumnName = "userName") private
-	 * userDetails user;
-	 */
 	@Column(name="account_id")
 	private long accountId;
 	@Column(name="sourceAcc")
 	private long sourceAcc;
 	@Column(name="destAcc")
 	private long destAcc;
-	
 	@Column(name="transType")
 	private String type;
 	@Column(name="remAmt")

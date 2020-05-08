@@ -26,16 +26,14 @@
                     
             </div>
         </nav>
-        <div class="row1">
-            <div class="col-sm-4" >
+        
                 
-                    <h4 class="impact">
-                    Hi! {{user.fullName}}<br>
-                    Let’s get you set up to send, spend, get paid, and more.
-                    </h4>
+                    <div  class="jumbotron jumbotron">
+                   <h2> Hi! {{user.fullName}}<br>
+                    Let’s get you set up to send, spend, get paid, and more.</h2>
+                    </div>
                
-        </div>
-        </div>
+       
         
             <div class="row">
                 <div class="col-lg-4">
@@ -46,7 +44,7 @@
                 <div class="col-lg-4">
            
             <div class="loginbox" >
-               <input type="submit" [routerLink]="['/balance']" value="View Balance" name="submit">
+               <!-- <input type="submit" [routerLink]="['/balance']" value="View Balance" name="submit"> -->
                 <input type="submit"  value="Add to the wallet" name="submit" (click)="onClickAdd()">
                 <input type="submit"  value="DeCredit it " name="submit" (click)="onClickWithdraw() ">
                <input type="submit" (click)="onClickTransfer()" value="Transfer Fund" name="submit">
@@ -55,8 +53,10 @@
                <input type="submit" (click)="onClickDelete()" value="Delete Account" name="submit">
                
             </div>
+        </div>
             </div>
-            </div>
+            
+            
             
 
             <div class="footer" >

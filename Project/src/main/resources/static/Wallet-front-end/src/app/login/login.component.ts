@@ -18,7 +18,7 @@ export class loginComponent implements OnInit {
   id1;
   id2;
   confirmUser = new Detail();
-
+errorMessage;
   constructor(private _router: Router, private _projectservice: ProjectService) {
 
 
@@ -39,13 +39,16 @@ export class loginComponent implements OnInit {
     if (this.id1 == this.id2 && this.id1 != null) {
       this._projectservice.setCurrentUser(this.confirmUser);
       this._projectservice.setBalance(this.confirmUser.balance);
-      this._router.navigate(['/successpage']);
+      this.errorMessage="";
+      
+     this._router.navigate(['/successpage']);
 
     }
     else if (this.id1 == null)
-      this._router.navigate(['/donotexist']);
+      this.errorMessage="Invalid Credentials";
     else
-      this._router.navigate(['/donotexist']);
+    this.errorMessage="Invalid Credentials";
+      
 
 
 

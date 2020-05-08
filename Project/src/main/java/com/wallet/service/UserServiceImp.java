@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.wallet.model.transactionDetails;
 import com.wallet.model.userDetails;
 import com.wallet.repository.UserRepository;
-import com.wallet.repository.transactionDetailRepository;
+
 
 @Service
 public class UserServiceImp implements WalletServiceInterface {
@@ -27,20 +27,7 @@ public class UserServiceImp implements WalletServiceInterface {
 					.getAccountId();
 			user.setAccountId(maxId + 1);
 		}
-		//String encryptedPassword = new String(passwordEncryptor(user.getPass().getBytes()));
-		//user.setPass(encryptedPassword);
-		//String encryptedTpin = new String(passwordEncryptor(user.getPin().getBytes()));
-		//user.setPin(encryptedTpin);
-		// TODO Auto-generated method stub
 		return userRepository.save(user);
-	}
-	@Override
-	public userDetails updateAccount1(userDetails customer) {
-		//String encryptedPassword = new String(passwordEncryptor(customer.getPass().getBytes()));
-		//customer.setPass(encryptedPassword);
-		//String encryptedTpin = new String(passwordEncryptor(customer.getPin().getBytes()));
-		//customer.setPin(encryptedTpin);
-		return userRepository.save(customer);
 	}
 
 	@Override
@@ -52,19 +39,9 @@ public class UserServiceImp implements WalletServiceInterface {
 	public List<userDetails> findAllAccount() {
 		List<userDetails> allCustomers = userRepository.findAll();
 		List<userDetails> allAccounts = allCustomers.stream().map((customer) -> {
-
-			//String decryptedPassword = new String(passwordDecryptor(customer.getPass().getBytes()));
-			//customer.setPass(decryptedPassword);
-
-			
-			 // String decryptedTpin = new
-			  //String(passwordDecryptor(customer.getPin().getBytes()));
-			  //customer.setPin(decryptedTpin);
-			 
 			return customer;
 		}).collect(Collectors.toList());
 		return allAccounts;
-		// TODO Auto-generated method stub
 
 	}
 
@@ -73,35 +50,11 @@ public class UserServiceImp implements WalletServiceInterface {
 	public userDetails findAccountById(int accountId) {
 
 		userDetails customer = userRepository.findById(accountId).get();
-		//String decryptedPassword = new String(passwordDecryptor(customer.getPass().getBytes()));
-		//customer.setPass(decryptedPassword);
-		
-		 //String decryptedTpin = new
-		  //String(passwordDecryptor(customer.getPin().getBytes()));
-		  //customer.setPin(decryptedTpin);
-		 
 		return customer;
 
 	}
 
-	@Override
-	public byte[] passwordDecryptor(byte[] password) {
 
-		byte[] encrypted = new byte[password.length];
-		for (int i = 0; i < password.length; i++) {
-			encrypted[i] = (byte) ((i % 2 == 0) ? password[i] - 1 : password[i] + 1);
-		}
-		return encrypted;
-	}
-
-	@Override
-	public byte[] passwordEncryptor(byte[] password) {
-		byte[] encrypted = new byte[password.length];
-		for (int i = 0; i < password.length; i++) {
-			encrypted[i] = (byte) ((i % 2 == 0) ? password[i] + 1 : password[i] - 1);
-		}
-		return encrypted;
-	}
 
 	@Override
 	public List<transactionDetails> printTransactions(int accountId) {
@@ -201,16 +154,6 @@ public class UserServiceImp implements WalletServiceInterface {
 		updateAccount(customer);
 		return true;
 	}
-	@Override
-	public boolean depositF(int accountId, float money, int sourceAcc) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public boolean withdrawF(int accountId, float money, int senderId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 
 }

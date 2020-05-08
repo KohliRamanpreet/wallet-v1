@@ -27,19 +27,21 @@
             </div>
         </nav>
         
-        
     
-        <h2>WELCOME to MoneyClip</h2>
-        <div *ngIf="(transType==1 && !transFlag)">
-          
+        
+        <div class="box">
+          <h3><b>MoneyClip</b></h3>
+        <div *ngIf="transType==1 " >
+          <small class="text-danger">{{errorMessage}}</small>
             <form (ngSubmit)="proceedDeposit(depositForm)" #depositForm="ngForm">
                 <div class="form group">
                     <label for="money">Amount to be added in the wallet</label>
-                    <input size="5" type="number" name="money" class="form-control" ngModel #Money="ngModel">
+                    <input style="width: 200px;" type="number" name="money" class="form-control" ng-disabled="!transFlag" ngModel #Money="ngModel">
                   </div>
                     
                     <br>
-                    <input class="btn btn-primary" type="submit" value="Proceed" [disabled]="!depositForm.form.valid">
+
+                    <input *ngIf="!transFlag" class="btn btn-primary" type="submit" value="Proceed" [disabled]="!depositForm.form.valid">
             </form>
 
         </div>
@@ -47,48 +49,42 @@
             <form (ngSubmit)="deposit(depositForm)" #depositForm="ngForm">
               <div class="form group">
                 <label for="pin">Enter Transaction Pin to proceed...</label>
-                <input type="password" size="8" name="pin" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
+                <input style="width: 200px;" type="password"  name="pin" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
                 <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
                   <small class="text-danger">
                       <small *ngIf="pin.errors.required ">
                           PIN!
                       </small>
                       <small *ngIf="pin.errors.pattern">
-                           All digits.
+                           All digits min 4.
                       </small>
 
                   </small>
               </div>
               
               </div>
-              
+              <br>
               <input type="submit" value="Deposit" class="btn btn-primary" [disabled]= "!depositForm.form.valid">
             </form>
           </div>
           
         
-            <div *ngIf="(transType==2 && !transFlag)">
+            <div *ngIf="(transType==2 )">
+              <small class="text-danger">{{errorMessage}}</small>
             <form (ngSubmit)="proceedWithdraw(withdrawForm)" #withdrawForm="ngForm">
               <div class="form group">
                   <label for="money">Amount to be deducted from the wallet</label>
-                  <input type="number" name="money" size="5" class="form-control" ngModel #Money="ngModel">
+                  <input type="number" name="money" style="width: 200px;" class="form-control" ngModel #Money="ngModel">
                 </div>
-                  <!-- </div>
-                  <small [hidden]="Money.valid || Money.pristline">
-                      Please Enter Valid amoont.
-                  </small> 
-                  <small [hidden]="!negativeAmont">
-                      Please enter positive amount!
-                  </small> -->
                   <br>
-                  <input type="submit" value="Proceed" [disabled]="!withdrawForm.form.valid">
+                  <input type="submit" class="btn btn-primary" *ngIf="!transFlag" value="Proceed" [disabled]="!withdrawForm.form.valid">
           </form>
           </div>
           <div *ngIf = "(transType == 2 && transFlag)">
             <form (ngSubmit)="withdraw(withdrawForm)" #withdrawForm="ngForm">
               <div class="form group">
                 <label for="pin">Enter Transaction Pin to proceed...</label>
-                <input type="password" name="pin" size="5" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
+                <input type="password" name="pin" style="width: 200px;" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
              
                 <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
                   <small class="text-danger">
@@ -96,43 +92,42 @@
                           PIN!
                       </small>
                       <small *ngIf="pin.errors.pattern">
-                           All digits.
+                           All digits min 4.
                       </small>
 
-                  </small>
+                    </small>
               </div>
              
               </div>
-              
+              <br>
               <input type="submit" value="DeCredit" class="btn btn-primary" [disabled]= "!withdrawForm.form.valid">
             </form>
           </div>
-          <div *ngIf="(transType==3 && !transFlag)">
-            <h4>{{errorMessage}}</h4>
+          <div *ngIf="(transType==3)">
+            <small class="text-danger">{{errorMessage}}</small>
             <form (ngSubmit)="proceedFundTransfer(fundForm)" #fundForm="ngForm">
               <div class="form group">
                   <label for="money">Amount to be Sent</label>
-                  <input type="number" name="money" size="5" class="form-control" ngModel #Money="ngModel">
+                  <input style="width: 200px;" type="number" name="money"  class="form-control" ngModel #Money="ngModel">
                 </div>
                 <div class="form group">
                   <label for="money">Reciever AccountId</label>
-                  <input type="number" size="5" name="rId" class="form-control" ngModel #Money="ngModel">
+                  <input style="width: 200px;" type="number" name="rId" class="form-control" ngModel #Money="ngModel">
                 </div>
                 <div class="form group">
                   <label for="money">Re-enter Reciever AccountId</label>
-                  <input type="number" size="5"  name="rRId" class="form-control" ngModel #Money="ngModel">
+                  <input style="width: 200px;" type="number"   name="rRId" class="form-control" ngModel #Money="ngModel">
                 </div>
                   <br>
-                  <input type="submit" value="Proceed" class="btn btn-primary" [disabled]="!fundForm.form.valid">
+                  <input type="submit" value="Proceed" *ngIf="!transFlag" class="btn btn-primary" [disabled]="!fundForm.form.valid">
           </form>
           </div>
-          <i></i>
           <div *ngIf="(transType==3 && transFlag)"> 
             
             <form (ngSubmit)="fundTransfer(withdrawForm)" #withdrawForm="ngForm">
               <div class="form group">
                 <label for="transactionPin">Enter Transaction Pin to proceed...</label>
-                <input type="password" size="5" name="pin" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
+                <input type="password" style="width: 200px;" name="pin" class="form-control" ngModel #pin="ngModel" pattern="\d{4,8}$"> 
              
                 <div *ngIf="pin.invalid && (pin.dirty || pin.touched)">
                   <small class="text-danger">
@@ -140,58 +135,68 @@
                           PIN!
                       </small>
                       <small *ngIf="pin.errors.pattern">
-                           All digits.
+                           All digits min 4.
                       </small>
 
                   </small>
               </div>
               </div>
-              
-              <input type="submit" size="5" value="DeCredit" class="btn btn-primary" [disabled]= "!withdrawForm.form.valid">
-            </form>
-          </div>
-          <div *ngIf="transType==4">
-            <form (ngSubmit)="edit(e)" #e="ngForm">
-              Edit:
               <br>
-              <div class="form group">
-                <label>Name</label><br>
-                <input type="text" name="name" placeholder={{user.fullName}} pattern="^[A-Za-z\s]{3,100}$" #name="ngModel" [(ngModel)]=user.fullName>
-                <div *ngIf="name.invalid "> <small *ngIf="name.errors.pattern">  Invalid Name.
-              </small> </div>
-             </div>
-              <div class="form group">
-                <label>User Name</label><br>
-                <input type="text" name="name1" placeholder={{user.userName}} pattern="^[A-Za-z0-9\s]{4,20}$" #name1="ngModel" [(ngModel)]=user.userName>
-                <div *ngIf="name1.invalid "> <small *ngIf="name1.errors.pattern">  Invalid User Name.
-                </small> </div>
-              </div>
-              <div class="form group">
-                <label>Mobile Number</label><br>
-                <input type="text" name="no" placeholder={{user.pNumber}} pattern="^[0-9]{10}$" #no="ngModel" [(ngModel)]=user.pNumber>
-                <div *ngIf="no.invalid "> <small *ngIf="no.errors.pattern"> Invalid Mobile Number.
-                </small> </div>
-              </div>
-              <div class="form group">
-                <label>E-Mail</label><br>
-                <input type="text" name="email" placeholder={{user.eMail}} pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel" [(ngModel)]=user.eMail>
-                <div *ngIf="email.invalid ">   <small *ngIf="email.errors.pattern"> Invalid Email Id.
-                </small> </div>
-              </div>
-              <input type="submit"  value="confirm" class="btn btn-primary" [disabled]= "!e.form.valid">
-    
-
+              <input type="submit"  value="Transfer" class="btn btn-primary" [disabled]= "!withdrawForm.form.valid">
             </form>
-           
-
           </div>
+         
           <div class="jumbotron jumbotron-fluid" *ngIf="transType==5">
 
             <form (ngSubmit)="delete()">
               <h3>Are you sure you want to delete your account?</h3>
+              <br>
               <input type="submit" value="Delete Account Permanently" class="btn btn-primary">
             </form>
           </div>
+      
+      
+        <div *ngIf="transType==4">
+          <form (ngSubmit)="edit(e)" #e="ngForm">
+            Edit:
+            <br>
+            <div class="form group">
+              <label>Name</label><br>
+              <input type="text" name="name" placeholder={{user.fullName}} pattern="^[A-Za-z\s]{3,100}$" #name="ngModel" [(ngModel)]=user.fullName>
+              <div *ngIf="name.invalid "> <small class="text-danger"  *ngIf="name.errors.pattern">  Invalid Name.
+            </small> </div>
+           </div>
+           <br>
+            <div class="form group">
+              <label>User Name</label><br>
+              <input type="text" name="name1" placeholder={{user.userName}} pattern="^[A-Za-z0-9\s]{4,20}$" #name1="ngModel" [(ngModel)]=user.userName>
+              <div *ngIf="name1.invalid "> <small class="text-danger"  *ngIf="name1.errors.pattern">  Invalid User Name.
+              </small> </div>
+            </div>
+            <br>
+            <div class="form group">
+              <label>Mobile Number</label><br>
+              <input type="text" name="no" placeholder={{user.pNumber}} pattern="^[0-9]{10}$" #no="ngModel" [(ngModel)]=user.pNumber>
+              <div *ngIf="no.invalid "> <small class="text-danger"  *ngIf="no.errors.pattern"> Invalid Mobile Number.
+              </small> </div>
+            </div>
+            <br>
+            <div class="form group">
+              <label>E-Mail</label><br>
+              <input type="text" name="email" placeholder={{user.eMail}} pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel" [(ngModel)]=user.eMail>
+              <div *ngIf="email.invalid ">   <small class="text-danger" *ngIf="email.errors.pattern"> Invalid Email Id.
+              </small> </div>
+            </div>
+            <br>
+            <input type="submit"  value="confirm" class="btn btn-primary" [disabled]= "!e.form.valid">
+  
+
+          </form>
+         </div>
+
+        </div>
+        
+        
           <div class="footer" >
 
     
@@ -200,6 +205,6 @@
             </div>
             
            
-          
+        
         </div>
-        </body>
+      </body>

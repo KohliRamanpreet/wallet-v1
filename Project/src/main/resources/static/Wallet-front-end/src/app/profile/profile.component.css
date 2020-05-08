@@ -12,6 +12,22 @@
      font-family: 'Asap', sans-serif;
      
  }
+ .box
+ {
+   
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 5px 10px #888888;
+        align-content: center;
+        top: 40%;
+    left: 30%;
+    width: 500px;
+    min-height: 200px;
+    max-height: 400px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+      
+ }
  .footer {
     position: fixed;
     left: 0;

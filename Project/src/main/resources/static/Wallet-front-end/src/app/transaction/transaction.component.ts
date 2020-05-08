@@ -40,15 +40,18 @@ proceedDeposit (depositForm) {
     this.negativeAmount = false;
     if (this.money > 0) {
       this.transFlag = true;
+      this.errorMessage="";
     } else {
       this.negativeAmount = true;
+      this.errorMessage="Cannot Deposit negative Amount";
     }
   }
 
   deposit(depositForm) {
+
     if (depositForm.value.pin == this.user.pin) {
       this._projectService.deposit(this.user.accountId, this.money).subscribe();
-    //  setTimeout(() => {
+  
         this._projectService.getUserbyID(this.user.accountId).subscribe((customer) => {
           this._projectService.setCurrentUser(customer);
           this.user1=this._projectService.getCurrentUser();
@@ -63,11 +66,24 @@ proceedDeposit (depositForm) {
   proceedWithdraw (withdrawForm) {
     this.money = withdrawForm.value.money;
     this.negativeAmount = false;
-    if (this.money > 0) {
+    if (this.money > 0 )  {
+      if(this.money>this.user.balance)
+      {
+        this.negativeAmount = true;
+      this.errorMessage="Insufficient fund";
+      }
+      else
+      {this.errorMessage="";
       this.transFlag = true;
-    } else {
-      this.negativeAmount = true;
     }
+
+    }
+    
+    else {
+      this.negativeAmount = true;
+      this.errorMessage="Cannot withdraw negative amount";
+    }
+
   }
 
   withdraw(withdrawForm) {
@@ -106,12 +122,25 @@ this._projectService.existUserById(this.recieverId).subscribe((exists)=>{
      this.errorMessage="";
     this.negativeAmount = false;
     if (this.money > 0) {
+      if(this.user.balance<this.money)
+      {
+        this.negativeAmount=true;
+        this.errorMessage="Insufficient fund";
+      }
+      else{
       this.transFlag = true;
+      this.errorMessage="";
+      }
     } else {
       this.negativeAmount = true;
+      this.errorMessage="cannot send negative amount";
     }
     this.check=false;
 
+  }
+  else
+  {
+    this.errorMessage="This Id does not exist"
   }
 
   }

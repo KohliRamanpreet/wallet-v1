@@ -20,7 +20,35 @@
      margin: 0;
      padding: 0;
      font-family: 'Asap', sans-serif;
+ }
+     .jumbotron
+ {
+   
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 5px 10px #888888;
+        
+    
+      
+ 
      
+ }
+
+ .box
+ {
+   
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 5px 10px #888888;
+        align-content: center;
+        top: 52%;
+    left: 70%;
+    width: 400px;
+    min-height: 300px;
+    position: absolute;
+    background-color: whitesmoke;
+    transform: translate(-50%,-50%);
+      
  }
  .loginbox a {
     text-decoration: none;

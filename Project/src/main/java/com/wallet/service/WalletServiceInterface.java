@@ -11,20 +11,13 @@ import com.wallet.model.userDetails;
 public interface WalletServiceInterface {
 	userDetails createAccount(userDetails user);
 	List<userDetails> findAllAccount();
-	byte[] passwordDecryptor(byte[] password);
-	byte[] passwordEncryptor(byte[] password);
 	userDetails findAccountById(int accountId);
 	List<transactionDetails> printTransactions(int accountId);
 	boolean fundTransfer(int senderId, int receiverId, float money);
 	userDetails updateAccount(userDetails customer);
 	boolean withdraw(int accountId, float money);
 	boolean deposit(int accountId, float money);
-
-	
-	boolean depositF(int accountId, float money, int sourceAcc);
-	boolean withdrawF(int accountId, float money, int senderId);
 	boolean deleteAccountById(int accountID);
-	userDetails updateAccount1(userDetails customer);
 	boolean fundTransfer1(int senderId, int receiverId, float money);
 
 }

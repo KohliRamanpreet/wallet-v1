@@ -3,7 +3,6 @@ package com.wallet.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,7 +20,6 @@ import javax.validation.constraints.Email;
 @Entity
 @Table(name="wallets_user")
 public class userDetails {
-	
 	@Id
 	@Column(name="Account_Id",length=7)
 	private int accountId;
