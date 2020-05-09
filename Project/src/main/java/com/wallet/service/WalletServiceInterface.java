@@ -1,12 +1,8 @@
 package com.wallet.service;
-
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.wallet.model.transactionDetails;
 import com.wallet.model.userDetails;
-
 @Service
 public interface WalletServiceInterface {
 	userDetails createAccount(userDetails user);

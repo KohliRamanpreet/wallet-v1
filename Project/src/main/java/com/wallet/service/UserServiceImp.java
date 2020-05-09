@@ -1,12 +1,9 @@
 package com.wallet.service;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.wallet.model.transactionDetails;
 import com.wallet.model.userDetails;
 import com.wallet.repository.UserRepository;
@@ -29,6 +26,13 @@ public class UserServiceImp implements WalletServiceInterface {
 		}
 		return userRepository.save(user);
 	}
+<<<<<<< HEAD
+=======
+	@Override
+	public userDetails updateAccount1(userDetails customer) {
+		return userRepository.save(customer);
+	}
+>>>>>>> b75efe7769d77e5fa787dc03c5ca46048bc1602a
 
 	@Override
 	public boolean deleteAccountById(int accountID) {
@@ -38,14 +42,16 @@ public class UserServiceImp implements WalletServiceInterface {
 	@Override
 	public List<userDetails> findAllAccount() {
 		List<userDetails> allCustomers = userRepository.findAll();
+<<<<<<< HEAD
 		List<userDetails> allAccounts = allCustomers.stream().map((customer) -> {
+=======
+		List<userDetails> allAccounts = allCustomers.stream().map((customer) -> { 
+>>>>>>> b75efe7769d77e5fa787dc03c5ca46048bc1602a
 			return customer;
 		}).collect(Collectors.toList());
 		return allAccounts;
 
 	}
-
-	
 	@Override
 	public userDetails findAccountById(int accountId) {
 
@@ -54,7 +60,10 @@ public class UserServiceImp implements WalletServiceInterface {
 
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b75efe7769d77e5fa787dc03c5ca46048bc1602a
 
 	@Override
 	public List<transactionDetails> printTransactions(int accountId) {
@@ -86,11 +95,6 @@ public class UserServiceImp implements WalletServiceInterface {
 	
 	@Override
 	public userDetails updateAccount(userDetails customer) {
-		//String encryptedPassword = new String(passwordEncryptor(customer.getPass().getBytes()));
-		//customer.setPass(encryptedPassword);
-		 //String encryptedTpin = new
-		//String(passwordEncryptor(customer.getPin().getBytes()));
-		 //customer.setPin(encryptedTpin);
 		return userRepository.save(customer);
 	}
 	@Override
@@ -154,6 +158,10 @@ public class UserServiceImp implements WalletServiceInterface {
 		updateAccount(customer);
 		return true;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> b75efe7769d77e5fa787dc03c5ca46048bc1602a
 
 }

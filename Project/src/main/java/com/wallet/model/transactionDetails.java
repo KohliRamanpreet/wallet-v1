@@ -37,32 +37,27 @@ public class transactionDetails {
 	private Date timeStamp;
 	@Column(name="amtTransfered")
 	private double amtTransfered;
-public int getTransactionId() {
+        public int getTransactionId() {
 		return transactionId;
 	}
 
-public String getType() {
-	return type;
-}
-public void setType(String type) {
-	this.type = type;
-}
+       public String getType() {
+	         return type;
+       }
+       public void setType(String type) {
+	      this.type = type;
+             }
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
-	//	public userDetails getUser() {
-//		return user;
-//	}
-//	public void setUser(userDetails user) {
-//		this.user = user;
-//	}
+	
+
 	public long getAccountId() {
 		return accountId;
 	}
 	public void setAccountId(long accountId) {
 		this.accountId = accountId;
-	}
-//	
+		
 	public long getSourceAcc() {
 		return sourceAcc;
 	}
