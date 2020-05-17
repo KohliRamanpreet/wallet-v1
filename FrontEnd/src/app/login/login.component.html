@@ -1,0 +1,67 @@
+<head>
+    <title>Project</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="strong" class="navbar-brand" style="color: black" >MoneyClip</span>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Login</a></li>
+                <li style="color: black;"><a href="#"><span style="color: black;"
+                            class="	glyphicon glyphicon-globe"></span>
+                        <strong> About Us </strong></a></li>
+                <li style="color: black;"><a href="#"><span style="color: black;"
+                            class="glyphicon glyphicon-envelope"></span>
+                        Mail Us</a></li>
+                <li style="color: black;"><a href="#"><span style="color: black;"
+                            class="glyphicon glyphicon-earphone"></span>
+                        Call Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        <div class="loginbox">
+            <img src="/assets/Images/avatar.svg" class="avatar" alt="User">
+            <h1>Login</h1>
+            <form #enForm="ngForm" novalidate>
+                <div class="form-group">
+                    <label>User Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" required [(ngModel)]=username
+                        #name="ngModel">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                        <small class="text-danger">
+                            <small *ngIf="name.errors.required">
+                                Name is required.
+                            </small>
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="pass" name="pass" class="form-control" required [(ngModel)]=password
+                        #pass="ngModel">
+                    <div *ngIf="pass.invalid && (pass.dirty || pass.touched)">
+                        <small class="text-danger">
+
+                            <small *ngIf="pass.errors.required">
+                                Password is required.
+                            </small>
+                        </small>
+                    </div>
+                </div>
+                <div small class="text-danger">{{errorMessage}}</div>
+                <input type="submit" name="submit" value="Login" (click)="onSubmit()" [disabled]="enForm.form.invalid">
+                <a href="#">Forgot password?</a>
+                <a [routerLink]="['/signup']">SignUp?</a>
+            </form>
+        </div>
+    </div>
+<div class="footer" >
+    <div class="footer-copyright text-center ">© 2020 Copyright:
+      <a> MoneyClip.com</a>
+    </div>
+
+</div>
+</body>

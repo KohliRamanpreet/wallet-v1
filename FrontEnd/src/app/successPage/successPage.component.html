@@ -1,0 +1,76 @@
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="strong" class="navbar-brand" style="color: black"><strong>MoneyClip</strong></span>
+            </div>
+            <ul class="nav navbar-nav">
+                <li style="color: black;" class="active"><a><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li style="color: black;"><a href="#"><span style="color: black;"
+                            class="	glyphicon glyphicon-globe"></span>
+                        About Us</a></li>
+                <li style="color: black;"><a href="#"><span style="color: black;"
+                            class="glyphicon glyphicon-envelope"></span>
+                        Mail Us</a></li>
+                <li style="color: black;"><a href="#"><span style="color: black;"
+                            class="glyphicon glyphicon-earphone"></span>
+                        Call Us</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li style="color: black;"> <a [routerLink]="['\profile']"><span style="color: black;"
+                            class="	glyphicon glyphicon-user"></span>Profile</a></li>
+                <li style="color: black;"><a [routerLink]="['']"><span style="color: black;"
+                            class="	glyphicon glyphicon-off"></span>Log Off</a></li>
+
+            </ul>
+
+
+        </div>
+    </nav>
+
+
+    <div class="jumbotron jumbotron">
+        <h2> Hi! {{user.fullName}}<br>
+            Let’s get you set up to send, spend, get paid, and more.</h2>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-4">
+            <h1> Welcome</h1>
+            <h2><i>A few Clicks is all it takes</i></h2>
+
+        </div>
+        <div class="col-lg-4">
+
+            <div class="loginbox">
+
+                <br>
+                <input type="submit" value="Add to the wallet" name="submit" (click)="onClickAdd()">
+                <input type="submit" value="DeCredit it " name="submit" (click)="onClickWithdraw() ">
+                <input type="submit" (click)="onClickTransfer()" value="Transfer Fund" name="submit">
+                <input type="submit" [routerLink]="['/print']" value="View Transactions" name="submit">
+                <input type="submit" (click)="onClickEdit()" value="Edit profile" name="submit">
+                <input type="submit" (click)="onClickDelete()" value="Delete Account" name="submit">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+
+
+        <div class="footer-copyright text-center ">© 2020 Copyright:
+            <a> MoneyClip.com</a>
+        </div>
+
+
+
+    </div>
+
+
+</body>
